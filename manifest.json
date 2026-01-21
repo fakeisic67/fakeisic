@@ -2,7 +2,7 @@
   "name": "AliveApp ISIC",
   "short_name": "ISIC",
   "description": "ISIC Card App",
-  "start_url": "/",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#100c25",
   "theme_color": "#302a50",
@@ -22,4 +22,3 @@
     }
   ]
 }
-
