@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>AliveApp ISIC</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ISIC">
+    <meta name="theme-color" content="#302a50">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- Icons -->
+    <link rel="apple-touch-icon" href="isic/icon-192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="isic/icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="isic/icon-512.png">
+    
+    <!-- Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="isic/isicpokus.css">
+</head>
+<body>
+    <!-- Setup Modal -->
+    <div id="setup-modal" class="setup-modal">
+        <div class="setup-modal-content">
+            <h2>Nastavení aplikace</h2>
+            <p class="setup-instruction">
+                Pro plné využití aplikace si prosím přidejte ikonu na plochu vašeho zařízení. 
+                V Safari klikněte na tlačítko "Sdílet" a vyberte "Přidat na domovskou obrazovku".
+            </p>
+            <div class="setup-form">
+                <div class="setup-photo-section">
+                    <label>Nahrajte svou fotku:</label>
+                    <div class="setup-photo-frame" id="setup-photo-frame">
+                        <input type="file" id="setup-photo-upload" accept="image/*" onchange="loadSetupPhoto(event)" style="display: none;">
+                        <div id="setup-photo-placeholder" onclick="document.getElementById('setup-photo-upload').click();">
+                            Klikněte pro nahrání
+                        </div>
+                    </div>
+                </div>
+                <div class="setup-name-section">
+                    <label>Zadejte vaše jméno:</label>
+                    <input type="text" id="setup-name" placeholder="Jméno Příjmení" class="setup-name-input">
+                </div>
+                <button id="setup-done-btn" class="setup-done-btn" disabled>Done</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="top-bar">
+            <div class="cnttop">
+                <div class="platny">
+                    <div class="arrow">
+                        <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3.29883 5.17383L1.93359 5.0918L3.66211 6.67383L4.97461 8.00391C5.0918 8.11523 5.16211 8.27344 5.16211 8.45508C5.16211 8.80664 4.89844 9.07031 4.5293 9.07031C4.37109 9.07031 4.21289 9.00586 4.07227 8.87109L0.210938 5.00977C0.0761719 4.88086 0 4.71094 0 4.53516C0 4.35938 0.0761719 4.18359 0.210938 4.06055L4.06055 0.205078C4.21289 0.0585938 4.37109 0 4.5293 0C4.89844 0 5.16211 0.257812 5.16211 0.609375C5.16211 0.791016 5.0918 0.949219 4.97461 1.06641L3.66211 2.39648L1.93359 3.97266L3.29883 3.89648H10.4238C10.8047 3.89648 11.0742 4.1543 11.0742 4.53516C11.0742 4.91016 10.8047 5.17383 10.4238 5.17383H3.29883Z" fill="white"/>
+                        </svg>
+                    </div>
+                    <div class="circle"></div>
+                    <div class="platnytext"> PLATNÝ</div>
+                </div>
+                <span id="date-time"></span>
+            </div>
+        </div>
+        <div class="id-card">
+            <div class="photo-frame" id="photo-frame">
+                <input type="file" id="photo-upload" accept="image/*" onchange="loadPhoto(event)" style="display: none;">
+                <div id="photo-placeholder" onclick="document.getElementById('photo-upload').click();">
+                    Click to upload photo
+                </div>
+            </div>
+            <div class="details">
+                <input type="text" id="name" value="Jmeno Přepiš Mně" class="editable">
+                <div class="uni">
+                    <div id="university">České vysoké učení technické <br> v Praze</div>
+                </div>
+                <div class="static-details">
+                    <div>
+                        <span>Platnost | Validity</span>
+                        <input type="text" id="validity" value="04/2022 - 12/2026" class="editable">
+                    </div>
+                    <div>
+                        <span>Narozen(a) | Born</span>
+                        <input type="text" id="birthdate" value="22.08.2000" class="editable">
+                    </div>
+                </div>
+                <div class="qrcode">
+                    <div class="qr">
+                        <img src="isic/qrcode.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="dalsi">
+                <div class="overlay-container">
+                    <div class="group-1" id="grid">
+                        <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                        <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                        <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                        <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+
+                    </div>
+                    <div class="group-2" id="grid">
+                        <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                        <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                        <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                        <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+
+                    </div>
+                    <div class="group-3" id="grid">
+                        <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                        <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                        <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                        <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+
+                    </div>
+                    <div class="group-4" id="grid">
+                        <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                        <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                        <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                        <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+
+                    </div>
+                    <div class="group-5" id="grid">
+                        <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                        <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                        <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                        <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+
+                    </div>
+                    <div class="group-6" id="grid">
+                        <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                        <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                        <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                        <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+
+                    </div>
+                    <!-- Pokračuj pro další skupiny podle potřeby -->
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="icon-selector">
+        <div class="icon-item active">
+            <div class="icon-circle">
+                <svg width="17" height="12" viewBox="0 0 17 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1.92188 10.1426C0.65625 10.1426 0 9.49219 0 8.23828V1.9043C0 0.650391 0.65625 0 1.92188 0H11.9414C13.207 0 13.8633 0.650391 13.8633 1.9043V4.46484C13.6875 4.38281 13.4883 4.34766 13.2949 4.34766C13.0898 4.34766 12.8965 4.38281 12.7148 4.46484V3.79688H1.14844V8.13867C1.14844 8.70703 1.44727 8.99414 1.99219 8.99414H9.74414L9.39844 9.61523C9.30469 9.7793 9.24609 9.94336 9.2168 10.1426H1.92188ZM1.14844 2.43164H12.7148V2.00391C12.7148 1.43555 12.4102 1.14844 11.8711 1.14844H1.99219C1.44727 1.14844 1.14844 1.43555 1.14844 2.00391V2.43164ZM10.8105 11.2207C10.3242 11.2207 10.0078 10.8633 10.0078 10.4121C10.0078 10.2773 10.0488 10.1484 10.1191 10.0195L12.5977 5.57812C12.75 5.30273 13.0254 5.16211 13.2949 5.16211C13.5645 5.16211 13.834 5.30273 13.9863 5.57812L16.4707 10.0195C16.5469 10.1484 16.582 10.2773 16.582 10.4121C16.582 10.8633 16.2656 11.2207 15.7734 11.2207H10.8105ZM2.78906 7.92773C2.44336 7.92773 2.20898 7.69922 2.20898 7.36523V6.28125C2.20898 5.95312 2.44336 5.71875 2.78906 5.71875H4.22461C4.56445 5.71875 4.79883 5.95312 4.79883 6.28125V7.36523C4.79883 7.69922 4.56445 7.92773 4.22461 7.92773H2.78906ZM13.2949 8.94727C13.5117 8.94727 13.6758 8.79492 13.6816 8.58398L13.7285 6.98438C13.7344 6.73242 13.5527 6.55078 13.2949 6.55078C13.0371 6.55078 12.8555 6.73242 12.8613 6.98438L12.9082 8.58398C12.9141 8.79492 13.0723 8.94727 13.2949 8.94727ZM13.2949 10.3477C13.5879 10.3477 13.8164 10.125 13.8164 9.83789C13.8164 9.55664 13.582 9.33398 13.2949 9.33398C13.0137 9.33398 12.7734 9.55664 12.7734 9.83789C12.7734 10.125 13.0078 10.3477 13.2949 10.3477Z" fill="white"/>
+                </svg>
+            </div>
+        </div>
+        <div class="icon-divider"></div>
+        <div class="icon-item">
+            <div class="icon-circle">
+                <svg width="17" height="12" viewBox="0 0 17 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1.92188 10.1426C0.65625 10.1426 0 9.49219 0 8.23828V1.9043C0 0.650391 0.65625 0 1.92188 0H11.9414C13.207 0 13.8633 0.650391 13.8633 1.9043V4.46484C13.6875 4.38281 13.4883 4.34766 13.2949 4.34766C13.0898 4.34766 12.8965 4.38281 12.7148 4.46484V3.79688H1.14844V8.13867C1.14844 8.70703 1.44727 8.99414 1.99219 8.99414H9.74414L9.39844 9.61523C9.30469 9.7793 9.24609 9.94336 9.2168 10.1426H1.92188ZM1.14844 2.43164H12.7148V2.00391C12.7148 1.43555 12.4102 1.14844 11.8711 1.14844H1.99219C1.44727 1.14844 1.14844 1.43555 1.14844 2.00391V2.43164ZM10.8105 11.2207C10.3242 11.2207 10.0078 10.8633 10.0078 10.4121C10.0078 10.2773 10.0488 10.1484 10.1191 10.0195L12.5977 5.57812C12.75 5.30273 13.0254 5.16211 13.2949 5.16211C13.5645 5.16211 13.834 5.30273 13.9863 5.57812L16.4707 10.0195C16.5469 10.1484 16.582 10.2773 16.582 10.4121C16.582 10.8633 16.2656 11.2207 15.7734 11.2207H10.8105ZM2.78906 7.92773C2.44336 7.92773 2.20898 7.69922 2.20898 7.36523V6.28125C2.20898 5.95312 2.44336 5.71875 2.78906 5.71875H4.22461C4.56445 5.71875 4.79883 5.95312 4.79883 6.28125V7.36523C4.79883 7.69922 4.56445 7.92773 4.22461 7.92773H2.78906ZM13.2949 8.94727C13.5117 8.94727 13.6758 8.79492 13.6816 8.58398L13.7285 6.98438C13.7344 6.73242 13.5527 6.55078 13.2949 6.55078C13.0371 6.55078 12.8555 6.73242 12.8613 6.98438L12.9082 8.58398C12.9141 8.79492 13.0723 8.94727 13.2949 8.94727ZM13.2949 10.3477C13.5879 10.3477 13.8164 10.125 13.8164 9.83789C13.8164 9.55664 13.582 9.33398 13.2949 9.33398C13.0137 9.33398 12.7734 9.55664 12.7734 9.83789C12.7734 10.125 13.0078 10.3477 13.2949 10.3477Z" fill="white"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+    <script src="isic/script.js"></script>
+    <script>
+        // Function to apply random rotation to each GIF
+        document.addEventListener('DOMContentLoaded', () => {
+            const gifs = document.querySelectorAll('.rotating-gif');
+            gifs.forEach(gif => {
+                const randomAngle = Math.floor(Math.random() * 360); // Random angle between 0 and 360
+                gif.style.transform = `rotate(${randomAngle}deg)`;
+            });
+        });
+    </script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Select the groups in reverse order
+            const groups = Array.from(document.querySelectorAll('.group-1, .group-2, .group-3, .group-4, .group-5, .group-6')).reverse();
+            const animationDuration = 2000; // Duration of each animation cycle in milliseconds
+            const delayBetweenLoops = 2000; // 2-second pause between each loop
+            const totalCycleTime = animationDuration + delayBetweenLoops;
+    
+            function startAnimation() {
+                groups.forEach((group, index) => {
+                    // Restart animation with the delay and set alternate direction
+                    group.style.animation = 'fadeWave 2s ease-in-out forwards';
+                    group.style.animationPlayState = 'running';
+                    group.style.animationDelay = `${index * 0.2}s`; // Stagger delay for each group
+                });
+    
+                // Pause animations after they complete, then restart after the delayBetweenLoops
+                setTimeout(() => {
+                    groups.forEach((group) => {
+                        group.style.animation = 'none'; // Pause/reset the animation
+                    });
+    
+                    setTimeout(startAnimation, delayBetweenLoops); // Restart the animation after the pause
+                }, totalCycleTime);
+            }
+    
+            startAnimation(); // Initial call to start the animation
+        });
+    </script>
+    
+
+</body>
+</html>

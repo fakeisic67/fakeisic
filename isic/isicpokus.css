@@ -1,0 +1,563 @@
+body {
+    font-family: roboto;
+    background-color: #100c25;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow-y: hidden;
+    overflow-x: hidden;
+
+}
+
+.container {
+    margin-top: 5vw;
+    height: 90vh;
+    width: 85vw;
+    text-align: center;
+}
+
+.top-bar {
+    background-color: rgba(48, 42, 80);
+    padding: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 10px;
+    margin-bottom: 3vh;
+    height: 4vh;
+}
+
+.cnttop{
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+
+}
+
+.platny{
+    display: flex;
+    align-items: center;
+
+}
+
+.circle{
+    width: 3.5vw;
+    height: 3.5vw;
+    border-radius: 50%;
+    background-color: rgb(18, 192, 18);
+    margin-right: 2vw;
+
+}
+
+.arrow{
+    margin-right: 5vw;
+    display: flex;
+    align-items: center;
+   
+}
+
+.arrow {
+    height: 100%;}
+
+.arrow img,
+.arrow svg{
+    height: 2vw;
+    width: auto;
+    min-height: 15px;
+}
+
+.platnytext{
+    font-family: roboto;
+    font-size: 3.5vw;
+
+}
+
+#date-time {
+    font-family: roboto;
+    font-size: 3.5vw;    
+    display: flex;
+    align-items: center;
+    font-family: roboto;
+
+}
+
+.id-card {
+    background-image: url(final\ bckg.png);  
+    background-color: #44c1be;  
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: center top;    
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 0px;
+    border-radius: 25px;
+    height: 70vh;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    position: relative; /* Přidáno pro umístění relativní k divu .dalsi */
+    overflow: hidden; /* Skryje obsah, který přesahuje hranice tohoto kontejneru */
+}
+
+
+.bckgr {
+    width: 100%;
+    position: absolute; 
+     left: 0; 
+     right: 0; 
+     margin-inline: auto; 
+     width: fit-content;
+    z-index: -1;
+    object-fit: contain;
+}
+
+.bckgr img{
+    width: 85vw;
+}
+
+.photo-frame {
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.993);
+    width:21vw;
+    height: 26vw;
+    margin-left:  auto;
+    margin-right:  auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-top: 30vw;
+}
+
+.photo-frame img {
+    width: auto; /* Keep the width based on the height */
+    height: 100%; /* Set the height to 100% */
+    object-fit: cover; /* Ensures the image covers the frame while maintaining its aspect ratio */
+}
+
+#photo-placeholder {
+    color: #000000;
+    font-size: 12px;
+}
+
+.details {
+    margin-top: 20px;
+}
+
+.editable {
+    font-family: roboto;
+    background: none;
+    border: none;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    width: 100%;
+    margin: 0px 0;
+}
+
+#name{
+    font-family: roboto;
+    font-size: 5vw;
+    margin-bottom: 1vw;
+    padding: 0;
+    color: #000000;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+    cursor: text;
+}
+
+.uni {
+    display: flex; /* Change to block to allow wrapping */
+    width: 100%; /* Full width to accommodate the content */
+    justify-content: center;
+    margin-bottom: 4vw;
+}
+
+#university {
+    letter-spacing: 0.1vw;
+    margin: 0;
+    font-family: roboto;
+    font-size: 4vw;
+    width: 90%;
+    letter-spacing: 0px;
+    font-weight: 500;
+    height: auto;
+    resize: none; /* Prevent resizing by the user */
+    overflow: hidden;
+    background: none;
+    border: none;
+    color: #000000;
+    text-align: center;
+    line-height: 1.2; /* Adjust line height as needed */
+}
+
+.static-details span{
+    font-family: roboto;
+    font-size: 3vw;
+    font-weight: 400;
+    color: #0e6363;
+    font-weight: bold;
+}
+
+
+
+.editable:focus {
+    outline: none;
+}
+
+.static-details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+}
+
+.static-details div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#validity,
+#birthdate {
+    color: #000000;
+}
+
+/* Setup Modal */
+.setup-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+}
+
+.setup-modal.show {
+    display: flex;
+}
+
+.setup-modal-content {
+    background-color: #302a50;
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 90%;
+    width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: white;
+    text-align: center;
+}
+
+.setup-modal-content h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.setup-instruction {
+    margin-bottom: 30px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #ccc;
+}
+
+.setup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.setup-photo-section,
+.setup-name-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.setup-photo-section label,
+.setup-name-section label {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.setup-photo-frame {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    padding: 20px;
+    cursor: pointer;
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.setup-photo-frame img {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 5px;
+}
+
+#setup-photo-placeholder {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+}
+
+.setup-name-input {
+    padding: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.setup-name-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.setup-name-input:focus {
+    outline: none;
+    border-color: #5239d2;
+}
+
+.setup-done-btn {
+    padding: 15px 30px;
+    background-color: #5239d2;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.setup-done-btn:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.setup-done-btn:not(:disabled):hover {
+    background-color: #6345e0;
+}
+
+#dolektxt{
+    font-family: roboto;
+    font-size: 4vw;
+    font-weight: 600;
+    color: #000000;
+}
+
+.qrcode{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+
+}
+
+.qr{
+    border: solid;
+    border: #ff0099;
+    border-width: 100px;
+    height: 37vw;
+    width: 37vw;
+
+}
+
+.qr img{
+    width: 100%;
+
+}
+
+.dalsi {
+    user-select: none; /* Prevents text selection */
+    pointer-events: none; /* Disables interaction with the div */
+    opacity: 0.5;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+}
+
+
+.overlay-container {
+    pointer-events: none; /* Zajistí, že overlay nebude reagovat na doteky */
+    user-select: none; /* Zabrání výběru textu nebo jiných prvků uvnitř overlay */
+    rotate: -10deg;
+    display: grid;
+    grid-template-rows: repeat(6, 1fr);
+    z-index: 5;
+    row-gap: 10vw;
+}
+
+
+#grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 15vw;
+
+
+}
+
+
+.overlay-container img {
+    width: 20vw;
+    height: 20vw;
+    object-fit: cover;
+}
+
+
+.group-1, .group-2, .group-3, .group-4, .group-5, .group-6 {
+    opacity: 0;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+    animation-play-state: paused; /* Initially paused */
+    animation-direction: alternate-reverse; /* Starts in the reverse direction */
+    animation-iteration-count: infinite; /* Keeps the animation looping */
+}
+
+/* Keyframes for the fade animation */
+@keyframes fadeWave {
+    0% {
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+
+
+
+
+.group-1 {
+    animation-delay: 1.0s;
+    animation-name: fadeWave;
+}
+
+.group-2 {
+    animation-delay: 0.8s;
+    animation-name: fadeWave;
+}
+
+.group-3 {
+    animation-delay: 0.6s;
+    animation-name: fadeWave;
+}
+
+.group-4 {
+    animation-delay: 0.4s;
+    animation-name: fadeWave;
+}
+
+.group-5 {
+    animation-delay: 0.2s;
+    animation-name: fadeWave;
+}
+
+.group-6 {
+    animation-delay: 0.1s;
+    animation-name: fadeWave;
+}
+
+
+@media only screen and (max-height: 667px){
+    .id-card {
+        background-image: url(final\ bckg.png);  
+        background-color: #44c1be;  
+        background-size: 100% auto;
+        background-repeat: no-repeat;
+        background-position: center top;    
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 0px;
+        border-radius: 30px;
+        height: 80vh;
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        position: relative; /* Přidáno pro umístění relativní k divu .dalsi */
+        overflow: hidden; /* Skryje obsah, který přesahuje hranice tohoto kontejneru */
+    }
+    
+
+}
+
+.icon-selector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    background-color: #302a50;
+    border-radius: 50px;
+    margin-top: 3vh;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 12.5%;
+    padding: 5px;
+
+}
+
+.icon-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-item.active .icon-circle {
+    background-color: #5239d2;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-item:not(.active) .icon-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+}
+
+.icon-item svg {
+    width: 20px;
+    height: 14px;
+}
+
+.icon-divider {
+    width: 1px;
+    height: 12px;
+    background-color: #686288;
+    margin: 0 12px;
+}
+
+
