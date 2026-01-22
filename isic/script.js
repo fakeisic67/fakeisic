@@ -24,8 +24,8 @@ function loadPhoto(event) {
         const img = new Image();
         img.src = reader.result;
         // Poměr 33:40
-        img.style.width = '110px';
-        img.style.height = '133px';
+        img.style.width = '132px';
+        img.style.height = '160px';
         img.style.objectFit = 'cover';
         img.style.borderRadius = '5px';
         
@@ -49,6 +49,12 @@ function loadPhoto(event) {
         
         // Uložit fotku do localStorage
         localStorage.setItem('userPhoto', reader.result);
+
+        // Aktualizovat fotku i na "karta" zobrazení
+        const kartaImg = document.getElementById('karta-user-photo-img');
+        if (kartaImg) {
+            kartaImg.src = reader.result;
+        }
     };
     
     reader.readAsDataURL(event.target.files[0]);
@@ -65,8 +71,8 @@ function loadSavedPhoto() {
         const img = new Image();
         img.src = savedPhoto;
         // Poměr 33:40
-        img.style.width = '110px';
-        img.style.height = '133px';
+        img.style.width = '115px';
+        img.style.height = '145px';
         img.style.objectFit = 'cover';
         img.style.borderRadius = '5px';
         
@@ -86,6 +92,12 @@ function loadSavedPhoto() {
             e.stopPropagation();
             photoUpload.click();
         };
+
+        // Načíst fotku i do "karta" zobrazení
+        const kartaImg = document.getElementById('karta-user-photo-img');
+        if (kartaImg) {
+            kartaImg.src = savedPhoto;
+        }
     }
 }
 
@@ -148,6 +160,12 @@ function loadSetupPhoto(event) {
         
         // Uložit fotku do localStorage
         localStorage.setItem('userPhoto', reader.result);
+
+        // Aktualizovat fotku i na "karta" zobrazení
+        const kartaImg = document.getElementById('karta-user-photo-img');
+        if (kartaImg) {
+            kartaImg.src = reader.result;
+        }
         
         // Zkontrolovat, zda lze aktivovat tlačítko Done
         checkSetupForm();
@@ -172,6 +190,38 @@ function checkSetupForm() {
 
 // Inicializace při načtení stránky
 document.addEventListener('DOMContentLoaded', function() {
+    // Přepínání mezi dvěma "kartami" přes icon selector
+    const iconMain = document.getElementById('icon-main');
+    const iconKarta = document.getElementById('icon-karta');
+    const cardMain = document.getElementById('id-card-main');
+    const cardKarta = document.getElementById('id-card-karta');
+
+    function setActiveView(view) {
+        if (!iconMain || !iconKarta || !cardMain || !cardKarta) return;
+
+        const isMain = view === 'main';
+        iconMain.classList.toggle('active', isMain);
+        iconKarta.classList.toggle('active', !isMain);
+
+        cardMain.classList.toggle('is-hidden', !isMain);
+        cardKarta.classList.toggle('is-hidden', isMain);
+    }
+
+    function bindIcon(el, view) {
+        if (!el) return;
+        el.addEventListener('click', () => setActiveView(view));
+        el.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                setActiveView(view);
+            }
+        });
+    }
+
+    bindIcon(iconMain, 'main');
+    bindIcon(iconKarta, 'karta');
+    setActiveView('main');
+
     const savedPhoto = localStorage.getItem('userPhoto');
     const savedName = localStorage.getItem('userName');
     
