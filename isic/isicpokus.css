@@ -102,6 +102,122 @@ body {
     overflow: hidden; /* Skryje obsah, který přesahuje hranice tohoto kontejneru */
 }
 
+.is-hidden {
+    display: none !important;
+}
+
+.id-card--karta {
+    background-image: none;
+    background-color: transparent;
+    padding: 0;
+    overflow: hidden; /* text nesmí mimo kartu */
+    height: auto;
+    width: fit-content;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.karta-wrap {
+    position: relative;
+    display: inline-block;
+    overflow: hidden; /* text nesmí mimo obrázek */
+}
+
+.karta-image {
+    width: auto;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    background-color: #44c1be; /* fallback když obrázek nevyplní celý prostor */
+    max-width: 85vw;
+    max-height: 80vh;
+}
+
+.karta-user-photo {
+    position: absolute;
+    /* výchozí umístění – kdybys chtěl posunout, řekni "víc vlevo/výš" */
+    top: 5%;
+    left:8%;
+    width: 46%;
+    /* rámeček širší než vyšší: poměr 40:33 (výška = 82.5% šířky) */
+    height: 0;
+    padding-top: 40%;
+    overflow: hidden;
+    border-radius: 6px;
+}
+
+.karta-user-photo img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transform: translate(-50%, -50%) rotate(-90deg) scale(1.15);
+    transform-origin: center;
+}
+
+.karta-overlay {
+    position: absolute;
+    top: 70%;
+    left: 115%;
+    width: 75%;
+    height: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 5%;
+    pointer-events: none;
+    user-select: none;
+    text-align: left; /* text jde od prava */
+    font-family: roboto;
+    text-shadow: none;
+    transform: translate(-50%, -50%) rotate(-90deg);
+    transform-origin: center;
+}
+
+.karta-row {
+    min-width: 0;
+}
+
+.karta-row-cols {
+    display: flex;
+    justify-content: space-between;
+    gap: 10%;
+}
+
+.karta-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* zarovnání doprava v každém sloupci */
+    gap: 2%;
+    min-width: 0;
+}
+
+.karta-label {
+    font-size: clamp(10px, 2.2vw, 14px);
+    font-weight: 600;
+    line-height: 1.15;
+    color: #02584a;
+}
+
+.karta-value {
+    margin-top: 4px;
+    font-size: clamp(12px, 2.6vw, 16px);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: 0.2px;
+    word-break: break-word;
+    color: #000000;
+}
+
+.karta-value--name {
+    font-size: clamp(16px, 3.4vw, 22px);
+    font-weight: 400;
+}
+
 
 .bckgr {
     width: 100%;
@@ -121,8 +237,8 @@ body {
 .photo-frame {
     z-index: 10;
     background-color: rgba(255, 255, 255, 0.993);
-    width:21vw;
-    height: 26vw;
+    width: 25.2vw;
+    height: 31.2vw;
     margin-left:  auto;
     margin-right:  auto;
 
@@ -130,7 +246,7 @@ body {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    margin-top: 30vw;
+    margin-top: 25vw;
 }
 
 .photo-frame img {
@@ -393,13 +509,14 @@ body {
     top: 50%;
     transform: translate(-50%, -50%);
     position: absolute;
+    z-index: 20;
 }
 
 
 .overlay-container {
     pointer-events: none; /* Zajistí, že overlay nebude reagovat na doteky */
     user-select: none; /* Zabrání výběru textu nebo jiných prvků uvnitř overlay */
-    rotate: -10deg;
+    rotate: -20deg;
     display: grid;
     grid-template-rows: repeat(6, 1fr);
     z-index: 5;
@@ -417,8 +534,8 @@ body {
 
 
 .overlay-container img {
-    width: 20vw;
-    height: 20vw;
+    width: 21vw;
+    height: 21vw;
     object-fit: cover;
 }
 
@@ -528,6 +645,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 
 .icon-item.active .icon-circle {
@@ -549,8 +667,8 @@ body {
 }
 
 .icon-item svg {
-    width: 20px;
-    height: 14px;
+    width: 24px;
+    height: 24px;
 }
 
 .icon-divider {
