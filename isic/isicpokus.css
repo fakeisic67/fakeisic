@@ -110,18 +110,20 @@ body {
     background-image: none;
     background-color: transparent;
     padding: 0;
-    overflow: hidden; /* text nesmí mimo kartu */
+    overflow: visible; /* karta.png se nesmí ořezávat */
     height: auto;
     width: fit-content;
     display: block;
     margin-left: auto;
     margin-right: auto;
+    border-radius: 0;
 }
 
 .karta-wrap {
     position: relative;
     display: inline-block;
-    overflow: hidden; /* text nesmí mimo obrázek */
+    overflow: hidden;
+    border-radius: 20px;
 }
 
 .karta-image {
@@ -168,7 +170,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    gap: 5%;
+    gap: 1%;
     pointer-events: none;
     user-select: none;
     text-align: left; /* text jde od prava */
@@ -205,7 +207,7 @@ body {
 
 .karta-value {
     margin-top: 4px;
-    font-size: clamp(12px, 2.6vw, 16px);
+    font-size: clamp(14px, 2.6vw, 16px);
     font-weight: 400;
     line-height: 1.15;
     letter-spacing: 0.2px;
@@ -214,7 +216,7 @@ body {
 }
 
 .karta-value--name {
-    font-size: clamp(16px, 3.4vw, 22px);
+    font-size: clamp(20px, 3.4vw, 22px);
     font-weight: 400;
 }
 
