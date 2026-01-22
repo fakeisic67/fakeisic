@@ -1,3 +1,8 @@
+html {
+    overflow: hidden;
+    height: 100%;
+}
+
 body {
     font-family: roboto;
     background-color: #100c25;
@@ -8,9 +13,10 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    overflow-y: hidden;
-    overflow-x: hidden;
-
+    overflow: hidden;
+    touch-action: pan-y pinch-zoom;
+    position: fixed;
+    width: 100%;
 }
 
 .container {
