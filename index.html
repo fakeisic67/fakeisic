@@ -66,7 +66,7 @@
                 <span id="date-time"></span>
             </div>
         </div>
-        <div class="id-card">
+        <div class="id-card" id="id-card-main">
             <div class="photo-frame" id="photo-frame">
                 <input type="file" id="photo-upload" accept="image/*" onchange="loadPhoto(event)" style="display: none;">
                 <div id="photo-placeholder" onclick="document.getElementById('photo-upload').click();">
@@ -143,20 +143,101 @@
             </div>
             
         </div>
+        <div class="id-card id-card--karta is-hidden" id="id-card-karta">
+            <div class="karta-wrap">
+                <img src="isic/karta.png" alt="Karta" class="karta-image">
+                <div class="karta-user-photo" aria-hidden="true">
+                    <img id="karta-user-photo-img" alt="">
+                </div>
+                <div class="karta-overlay" aria-hidden="true">
+                    <div class="karta-row karta-row-name">
+                        <div class="karta-field">
+                            <div class="karta-label">Name | Jméno</div>
+                            <div class="karta-value karta-value--name" id="karta-name">David Mecka</div>
+                        </div>
+                    </div>
+
+                    <div class="karta-row karta-row-cols">
+                        <div class="karta-col karta-col-left">
+                            <div class="karta-field">
+                                <div class="karta-label">Born | Narozen(a)</div>
+                                <div class="karta-value" id="karta-born">22.08.2000</div>
+                            </div>
+                            <div class="karta-field">
+                                <div class="karta-label">Validity | Platnost</div>
+                                <div class="karta-value" id="karta-validity">04/2026</div>
+                            </div>
+                        </div>
+
+                        <div class="karta-col karta-col-right">
+                            <div class="karta-field">
+                                <div class="karta-label">Card Number | Číslo karty</div>
+                                <div class="karta-value" id="karta-card-number">7833600462486811</div>
+                            </div>
+                            <div class="karta-field">
+                                <div class="karta-label">ISIC Number | Číslo ISIC</div>
+                                <div class="karta-value" id="karta-isic-number">S 420 330 687 667 J</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="icon-selector">
-        <div class="icon-item active">
+        <div class="icon-item active" id="icon-main" role="button" tabindex="0" aria-label="Zobrazit kartu s detaily">
             <div class="icon-circle">
-                <svg width="17" height="12" viewBox="0 0 17 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1.92188 10.1426C0.65625 10.1426 0 9.49219 0 8.23828V1.9043C0 0.650391 0.65625 0 1.92188 0H11.9414C13.207 0 13.8633 0.650391 13.8633 1.9043V4.46484C13.6875 4.38281 13.4883 4.34766 13.2949 4.34766C13.0898 4.34766 12.8965 4.38281 12.7148 4.46484V3.79688H1.14844V8.13867C1.14844 8.70703 1.44727 8.99414 1.99219 8.99414H9.74414L9.39844 9.61523C9.30469 9.7793 9.24609 9.94336 9.2168 10.1426H1.92188ZM1.14844 2.43164H12.7148V2.00391C12.7148 1.43555 12.4102 1.14844 11.8711 1.14844H1.99219C1.44727 1.14844 1.14844 1.43555 1.14844 2.00391V2.43164ZM10.8105 11.2207C10.3242 11.2207 10.0078 10.8633 10.0078 10.4121C10.0078 10.2773 10.0488 10.1484 10.1191 10.0195L12.5977 5.57812C12.75 5.30273 13.0254 5.16211 13.2949 5.16211C13.5645 5.16211 13.834 5.30273 13.9863 5.57812L16.4707 10.0195C16.5469 10.1484 16.582 10.2773 16.582 10.4121C16.582 10.8633 16.2656 11.2207 15.7734 11.2207H10.8105ZM2.78906 7.92773C2.44336 7.92773 2.20898 7.69922 2.20898 7.36523V6.28125C2.20898 5.95312 2.44336 5.71875 2.78906 5.71875H4.22461C4.56445 5.71875 4.79883 5.95312 4.79883 6.28125V7.36523C4.79883 7.69922 4.56445 7.92773 4.22461 7.92773H2.78906ZM13.2949 8.94727C13.5117 8.94727 13.6758 8.79492 13.6816 8.58398L13.7285 6.98438C13.7344 6.73242 13.5527 6.55078 13.2949 6.55078C13.0371 6.55078 12.8555 6.73242 12.8613 6.98438L12.9082 8.58398C12.9141 8.79492 13.0723 8.94727 13.2949 8.94727ZM13.2949 10.3477C13.5879 10.3477 13.8164 10.125 13.8164 9.83789C13.8164 9.55664 13.582 9.33398 13.2949 9.33398C13.0137 9.33398 12.7734 9.55664 12.7734 9.83789C12.7734 10.125 13.0078 10.3477 13.2949 10.3477Z" fill="white"/>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 22 35 45">
+                  <defs>
+                    <style>
+                      .cls-1 {
+                        fill: #fff;
+                      }
+
+                      .cls-2 {
+                        fill: none;
+                        stroke: #fff;
+                        stroke-linecap: round;
+                        stroke-miterlimit: 10;
+                        stroke-width: 3px;
+                      }
+                    </style>
+                  </defs>
+                  <path class="cls-1" d="M29.27,25.6c.88,0,1.6.72,1.6,1.6v34.65c0,.88-.72,1.6-1.6,1.6H4.6c-.88,0-1.6-.72-1.6-1.6V27.19c0-.88.72-1.6,1.6-1.6h24.68M29.27,22.6H4.6c-2.54,0-4.6,2.06-4.6,4.6v34.65c0,2.54,2.06,4.6,4.6,4.6h24.68c2.54,0,4.6-2.06,4.6-4.6V27.19c0-2.54-2.06-4.6-4.6-4.6h0Z"/>
+                  <g>
+                    <path class="cls-1" d="M16.94,43.32c1.94,0,3.47.29,4.55.87.85.45.85.75.85.85,0,1.1-.89,1.99-1.99,1.99h-6.81c-1.1,0-1.99-.89-1.99-1.99,0-.1,0-.39.85-.85,1.07-.57,2.6-.87,4.55-.87M16.94,40.82c-2.37,0-4.28.39-5.73,1.16-1.45.77-2.17,1.79-2.17,3.05,0,2.48,2.01,4.49,4.49,4.49h6.81c2.48,0,4.49-2.01,4.49-4.49,0-1.26-.72-2.28-2.17-3.05-1.45-.77-3.36-1.16-5.73-1.16h0Z"/>
+                    <path class="cls-1" d="M16.94,34.56c.66,0,1.14.2,1.61.68s.68.96.68,1.61-.2,1.14-.68,1.61c-.47.47-.96.68-1.61.68s-1.14-.2-1.61-.68c-.47-.47-.68-.96-.68-1.61s.2-1.14.68-1.61c.47-.47.96-.68,1.61-.68M16.94,31.56c-1.45,0-2.7.52-3.74,1.55-1.04,1.04-1.55,2.28-1.55,3.74s.52,2.7,1.55,3.74c1.04,1.04,2.28,1.55,3.74,1.55s2.7-.52,3.74-1.55c1.04-1.04,1.55-2.28,1.55-3.74s-.52-2.7-1.55-3.74c-1.04-1.04-2.28-1.55-3.74-1.55h0Z"/>
+                  </g>
+                  <line class="cls-2" x1="10.94" y1="54.6" x2="22.94" y2="54.6"/>
                 </svg>
             </div>
         </div>
         <div class="icon-divider"></div>
-        <div class="icon-item">
+        <div class="icon-item" id="icon-karta" role="button" tabindex="0" aria-label="Zobrazit kartu jako obrázek">
             <div class="icon-circle">
-                <svg width="17" height="12" viewBox="0 0 17 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1.92188 10.1426C0.65625 10.1426 0 9.49219 0 8.23828V1.9043C0 0.650391 0.65625 0 1.92188 0H11.9414C13.207 0 13.8633 0.650391 13.8633 1.9043V4.46484C13.6875 4.38281 13.4883 4.34766 13.2949 4.34766C13.0898 4.34766 12.8965 4.38281 12.7148 4.46484V3.79688H1.14844V8.13867C1.14844 8.70703 1.44727 8.99414 1.99219 8.99414H9.74414L9.39844 9.61523C9.30469 9.7793 9.24609 9.94336 9.2168 10.1426H1.92188ZM1.14844 2.43164H12.7148V2.00391C12.7148 1.43555 12.4102 1.14844 11.8711 1.14844H1.99219C1.44727 1.14844 1.14844 1.43555 1.14844 2.00391V2.43164ZM10.8105 11.2207C10.3242 11.2207 10.0078 10.8633 10.0078 10.4121C10.0078 10.2773 10.0488 10.1484 10.1191 10.0195L12.5977 5.57812C12.75 5.30273 13.0254 5.16211 13.2949 5.16211C13.5645 5.16211 13.834 5.30273 13.9863 5.57812L16.4707 10.0195C16.5469 10.1484 16.582 10.2773 16.582 10.4121C16.582 10.8633 16.2656 11.2207 15.7734 11.2207H10.8105ZM2.78906 7.92773C2.44336 7.92773 2.20898 7.69922 2.20898 7.36523V6.28125C2.20898 5.95312 2.44336 5.71875 2.78906 5.71875H4.22461C4.56445 5.71875 4.79883 5.95312 4.79883 6.28125V7.36523C4.79883 7.69922 4.56445 7.92773 4.22461 7.92773H2.78906ZM13.2949 8.94727C13.5117 8.94727 13.6758 8.79492 13.6816 8.58398L13.7285 6.98438C13.7344 6.73242 13.5527 6.55078 13.2949 6.55078C13.0371 6.55078 12.8555 6.73242 12.8613 6.98438L12.9082 8.58398C12.9141 8.79492 13.0723 8.94727 13.2949 8.94727ZM13.2949 10.3477C13.5879 10.3477 13.8164 10.125 13.8164 9.83789C13.8164 9.55664 13.582 9.33398 13.2949 9.33398C13.0137 9.33398 12.7734 9.55664 12.7734 9.83789C12.7734 10.125 13.0078 10.3477 13.2949 10.3477Z" fill="white"/>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50.61 34">
+                  <defs>
+                    <style>
+                      .cls-1 {
+                        fill: #fff;
+                      }
+
+                      .cls-2 {
+                        fill: none;
+                        stroke: #fff;
+                        stroke-linecap: round;
+                        stroke-miterlimit: 10;
+                        stroke-width: 3px;
+                      }
+                    </style>
+                  </defs>
+                  <path class="cls-1" d="M46.02,3c.88,0,1.6.72,1.6,1.6v24.68c0,.88-.72,1.6-1.6,1.6H4.6c-.88,0-1.6-.72-1.6-1.6V4.6c0-.88.72-1.6,1.6-1.6h41.42M46.02,0H4.6C2.06,0,0,2.06,0,4.6v24.68c0,2.54,2.06,4.6,4.6,4.6h41.42c2.54,0,4.6-2.06,4.6-4.6V4.6c0-2.54-2.06-4.6-4.6-4.6h0Z"/>
+                  <g>
+                    <path class="cls-1" d="M16.44,19.42c1.94,0,3.47.29,4.55.87.85.45.85.75.85.85,0,1.1-.89,1.99-1.99,1.99h-6.81c-1.1,0-1.99-.89-1.99-1.99,0-.1,0-.39.85-.85,1.07-.57,2.6-.87,4.55-.87M16.44,16.92c-2.37,0-4.28.39-5.73,1.16s-2.17,1.79-2.17,3.05c0,2.48,2.01,4.49,4.49,4.49h6.81c2.48,0,4.49-2.01,4.49-4.49,0-1.26-.72-2.28-2.17-3.05s-3.36-1.16-5.73-1.16h0Z"/>
+                    <path class="cls-1" d="M16.44,10.66c.66,0,1.14.2,1.61.68.47.47.68.96.68,1.61s-.2,1.14-.68,1.61c-.47.47-.96.68-1.61.68s-1.14-.2-1.61-.68c-.47-.47-.68-.96-.68-1.62s.2-1.14.68-1.61c.47-.47.96-.68,1.61-.68M16.44,7.66c-1.45,0-2.7.52-3.74,1.55s-1.55,2.28-1.55,3.74.52,2.7,1.55,3.74c1.04,1.04,2.28,1.55,3.74,1.55s2.7-.52,3.74-1.55c1.04-1.04,1.55-2.28,1.55-3.74s-.52-2.7-1.55-3.74-2.28-1.55-3.74-1.55h0Z"/>
+                  </g>
+                  <line class="cls-2" x1="30.57" y1="12.95" x2="42.57" y2="12.95"/>
+                  <line class="cls-2" x1="30.57" y1="20.11" x2="42.57" y2="20.11"/>
                 </svg>
             </div>
         </div>
@@ -177,16 +258,16 @@
         document.addEventListener('DOMContentLoaded', () => {
             // Select the groups in reverse order
             const groups = Array.from(document.querySelectorAll('.group-1, .group-2, .group-3, .group-4, .group-5, .group-6')).reverse();
-            const animationDuration = 2000; // Duration of each animation cycle in milliseconds
-            const delayBetweenLoops = 2000; // 2-second pause between each loop
+            const animationDuration = 1500; // Duration of each animation cycle in milliseconds
+            const delayBetweenLoops = 1000; // 1-second pause between each loop
             const totalCycleTime = animationDuration + delayBetweenLoops;
     
             function startAnimation() {
                 groups.forEach((group, index) => {
                     // Restart animation with the delay and set alternate direction
-                    group.style.animation = 'fadeWave 2s ease-in-out forwards';
+                    group.style.animation = 'fadeWave 1.5s ease-in-out forwards';
                     group.style.animationPlayState = 'running';
-                    group.style.animationDelay = `${index * 0.2}s`; // Stagger delay for each group
+                    group.style.animationDelay = `${index * 0.15}s`; // Stagger delay for each group
                 });
     
                 // Pause animations after they complete, then restart after the delayBetweenLoops
