@@ -108,6 +108,10 @@ function saveUserName() {
         // Ukládání při změně
         nameInput.addEventListener('input', function() {
             localStorage.setItem('userName', this.value);
+            const kartaName = document.getElementById('karta-name');
+            if (kartaName) {
+                kartaName.textContent = this.value;
+            }
         });
         
         // Aktivovat focus při kliknutí (pro mobilní zařízení)
@@ -125,6 +129,11 @@ function loadSavedName() {
         if (nameInput) {
             nameInput.value = savedName;
         }
+
+        const kartaName = document.getElementById('karta-name');
+        if (kartaName) {
+            kartaName.textContent = savedName;
+        }
     }
 }
 
@@ -139,6 +148,16 @@ function updateValidity() {
     const validityInput = document.getElementById('validity');
     if (validityInput) {
         validityInput.value = validityText;
+    }
+}
+
+// Validity na "karta" view: 04/<aktuální rok>
+function updateKartaValidity() {
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    const kartaValidity = document.getElementById('karta-validity');
+    if (kartaValidity) {
+        kartaValidity.textContent = `04/${currentYear}`;
     }
 }
 
@@ -195,6 +214,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const iconKarta = document.getElementById('icon-karta');
     const cardMain = document.getElementById('id-card-main');
     const cardKarta = document.getElementById('id-card-karta');
+    const kartaCarousel = document.getElementById('karta-carousel');
+    const kartaTrack = kartaCarousel ? kartaCarousel.querySelector('.karta-track') : null;
+
+    function setKartaSlide(slide) {
+        if (!kartaCarousel || !kartaTrack) return;
+        const dots = Array.from(kartaCarousel.querySelectorAll('.karta-dot'));
+
+        dots.forEach((d) => d.classList.toggle('is-active', d.dataset.dot === slide));
+
+        const index = slide === 'back' ? 1 : 0;
+        kartaTrack.style.transform = `translateX(-${index * 50}%)`;
+    }
 
     function setActiveView(view) {
         if (!iconMain || !iconKarta || !cardMain || !cardKarta) return;
@@ -205,6 +236,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         cardMain.classList.toggle('is-hidden', !isMain);
         cardKarta.classList.toggle('is-hidden', isMain);
+
+        // při přepnutí na "karta" vždy začít na front
+        if (!isMain) {
+            setKartaSlide('front');
+        }
     }
 
     function bindIcon(el, view) {
@@ -222,11 +258,66 @@ document.addEventListener('DOMContentLoaded', function() {
     bindIcon(iconKarta, 'karta');
     setActiveView('main');
 
+    // Carousel swipe pro kartu (front/back) — přepínání vlevo/vpravo
+    if (kartaCarousel) {
+        const SWIPE_THRESHOLD_PX = 50;
+        let startX = 0;
+        let startY = 0;
+
+        function getCurrentSlide() {
+            const activeDot = kartaCarousel.querySelector('.karta-dot.is-active');
+            const current = activeDot && activeDot instanceof HTMLElement ? activeDot.dataset.dot : 'front';
+            return current === 'back' ? 'back' : 'front';
+        }
+
+        function handleSwipe(endX, endY) {
+            const dx = endX - startX;
+            const dy = endY - startY;
+            if (Math.abs(dx) < SWIPE_THRESHOLD_PX) return;
+            if (Math.abs(dx) < Math.abs(dy)) return; // ignorovat vertikální gesto
+            const current = getCurrentSlide();
+            if (dx < 0) {
+                // swipe left => next (back)
+                setKartaSlide('back');
+            } else {
+                // swipe right => prev (front)
+                setKartaSlide('front');
+            }
+        }
+
+        kartaCarousel.addEventListener('touchstart', (e) => {
+            const t = e.changedTouches[0];
+            if (!t) return;
+            startX = t.clientX;
+            startY = t.clientY;
+        }, { passive: true });
+
+        kartaCarousel.addEventListener('touchend', (e) => {
+            const t = e.changedTouches[0];
+            if (!t) return;
+            handleSwipe(t.clientX, t.clientY);
+        }, { passive: true });
+
+        // fallback pro desktop (myš / trackpad)
+        kartaCarousel.addEventListener('pointerdown', (e) => {
+            if (e.pointerType === 'touch') return;
+            startX = e.clientX;
+            startY = e.clientY;
+        });
+
+        kartaCarousel.addEventListener('pointerup', (e) => {
+            if (e.pointerType === 'touch') return;
+            handleSwipe(e.clientX, e.clientY);
+        });
+    }
+
     const savedPhoto = localStorage.getItem('userPhoto');
     const savedName = localStorage.getItem('userName');
+    const params = new URLSearchParams(window.location.search);
+    const forceSetup = params.get('setup') === '1';
     
     // Pokud nejsou uložené informace, zobrazit setup modal
-    if (!savedPhoto || !savedName) {
+    if (forceSetup || !savedPhoto || !savedName) {
         const modal = document.getElementById('setup-modal');
         modal.classList.add('show');
         
@@ -266,6 +357,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (name && currentPhoto) {
                     // Uložit jméno
                     localStorage.setItem('userName', name);
+
+                    const kartaName = document.getElementById('karta-name');
+                    if (kartaName) {
+                        kartaName.textContent = name;
+                    }
                     
                     // Zavřít modal
                     modal.classList.remove('show');
@@ -289,4 +385,5 @@ document.addEventListener('DOMContentLoaded', function() {
     
     updateTime();
     updateValidity();
+    updateKartaValidity();
 });

@@ -94,7 +94,7 @@ body {
     padding-right: 20px;
     padding-top: 0px;
     border-radius: 25px;
-    height: 70vh;
+    height: 65vh;
     margin-top: 10px;
     display: flex;
     flex-direction: column;
@@ -119,45 +119,121 @@ body {
     border-radius: 0;
 }
 
+.karta-carousel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.karta-viewport {
+    overflow: hidden;
+    width: min(85vw, 520px);
+}
+
+.karta-track {
+    display: flex;
+    width: 200%;
+    transition: transform 260ms ease;
+    will-change: transform;
+}
+
+.karta-slide {
+    flex: 0 0 50%;
+    display: flex;
+    justify-content: center;
+}
+
+.karta-dots {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    pointer-events: none; /* jen indikátor, přepínání je swipe */
+}
+
+.karta-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: none;
+    background: #8a8a8a;
+    padding: 0;
+}
+
+.karta-dot.is-active {
+    background: #39b2b2;
+}
+
 .karta-wrap {
     position: relative;
     display: inline-block;
     overflow: hidden;
     border-radius: 20px;
+    width: 100%;
+}
+
+
+
+.dalsi--karta {
+    position: absolute;
+    inset: 0;
+    left: 0;
+    top: 40%;
+    transform: none;
+    opacity: 0.5;
+    z-index: 15;
+}
+
+.karta-user-photo {
+    z-index: 10;
+}
+
+.karta-overlay {
+    z-index: 20;
 }
 
 .karta-image {
-    width: auto;
+    width: 100%;
     height: auto;
     display: block;
     object-fit: contain;
     background-color: #44c1be; /* fallback když obrázek nevyplní celý prostor */
-    max-width: 85vw;
     max-height: 80vh;
 }
 
 .karta-user-photo {
+    rotate: -90deg;
     position: absolute;
     /* výchozí umístění – kdybys chtěl posunout, řekni "víc vlevo/výš" */
     top: 5%;
-    left:8%;
-    width: 46%;
+    left:15%;
+    width: 34%;
     /* rámeček širší než vyšší: poměr 40:33 (výška = 82.5% šířky) */
     height: 0;
     padding-top: 40%;
     overflow: hidden;
     border-radius: 6px;
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.karta-user-photo-clip {
+    position: absolute;
+    inset: 0;
 }
 
 .karta-user-photo img {
+    rotate: 90deg;
     position: absolute;
     top: 50%;
-    left: 50%;
-    width: 100%;
+    left: -70%;
     height: 100%;
+    width: auto;
     display: block;
     object-fit: cover;
-    transform: translate(-50%, -50%) rotate(-90deg) scale(1.15);
+    background: transparent;
+    transform: translate(-50%, -50%) rotate(-90deg);
     transform-origin: center;
 }
 
@@ -390,6 +466,15 @@ body {
     color: #ccc;
 }
 
+.setup-instruction-image {
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+    margin: 0 auto 20px;
+    display: block;
+    border-radius: 12px;
+}
+
 .setup-form {
     display: flex;
     flex-direction: column;
@@ -483,7 +568,7 @@ body {
 }
 
 .qrcode{
-    margin-top: 10px;
+    margin-top: 30px;
     display: flex;
     justify-content: center;
 
@@ -514,8 +599,29 @@ body {
     z-index: 20;
 }
 
+.dalsikarta {
+    user-select: none; /* Prevents text selection */
+    pointer-events: none; /* Disables interaction with the div */
+    opacity: 0.5;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    z-index: 20;
+}
+
 
 .overlay-container {
+    pointer-events: none; /* Zajistí, že overlay nebude reagovat na doteky */
+    user-select: none; /* Zabrání výběru textu nebo jiných prvků uvnitř overlay */
+    rotate: -20deg;
+    display: grid;
+    grid-template-rows: repeat(6, 1fr);
+    z-index: 5;
+    row-gap: 10vw;
+}
+
+.dalsi--karta .overlay-container{
     pointer-events: none; /* Zajistí, že overlay nebude reagovat na doteky */
     user-select: none; /* Zabrání výběru textu nebo jiných prvků uvnitř overlay */
     rotate: -20deg;
@@ -614,7 +720,7 @@ body {
         padding-right: 20px;
         padding-top: 0px;
         border-radius: 30px;
-        height: 80vh;
+        height: 65vh;
         margin-top: 10px;
         display: flex;
         flex-direction: column;

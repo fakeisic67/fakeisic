@@ -27,24 +27,26 @@
     <!-- Setup Modal -->
     <div id="setup-modal" class="setup-modal">
         <div class="setup-modal-content">
-            <h2>Nastavení aplikace</h2>
+            <h2>App setup</h2>
             <p class="setup-instruction">
-                Pro plné využití aplikace si prosím přidejte ikonu na plochu vašeho zařízení. 
-                V Safari klikněte na tlačítko "Sdílet" a vyberte "Přidat na domovskou obrazovku".
+                For the best experience!!!!! Add this app to your home screen.
+                In Safari, tap “Share” and then choose “Add to Home Screen”.
+                After adding it to your home screen, it will behave like a native app.
             </p>
+            <img src="isic/instruction.png" alt="Installation instructions" class="setup-instruction-image">
             <div class="setup-form">
                 <div class="setup-photo-section">
-                    <label>Nahrajte svou fotku:</label>
+                    <label>Upload your photo:</label>
                     <div class="setup-photo-frame" id="setup-photo-frame">
                         <input type="file" id="setup-photo-upload" accept="image/*" onchange="loadSetupPhoto(event)" style="display: none;">
                         <div id="setup-photo-placeholder" onclick="document.getElementById('setup-photo-upload').click();">
-                            Klikněte pro nahrání
+                            Click to upload
                         </div>
                     </div>
                 </div>
                 <div class="setup-name-section">
-                    <label>Zadejte vaše jméno:</label>
-                    <input type="text" id="setup-name" placeholder="Jméno Příjmení" class="setup-name-input">
+                    <label>Enter your name: (Name Surname)</label>
+                    <input type="text" id="setup-name" placeholder="First Last" class="setup-name-input">
                 </div>
                 <button id="setup-done-btn" class="setup-done-btn" disabled>Done</button>
             </div>
@@ -144,42 +146,155 @@
             
         </div>
         <div class="id-card id-card--karta is-hidden" id="id-card-karta">
-            <div class="karta-wrap">
-                <img src="isic/karta.png" alt="Karta" class="karta-image">
-                <div class="karta-user-photo" aria-hidden="true">
-                    <img id="karta-user-photo-img" alt="">
+            <div class="karta-carousel" id="karta-carousel">
+                <div class="karta-viewport">
+                    <div class="karta-track">
+                        <div class="karta-slide" data-slide="front">
+                            <div class="karta-wrap">
+                        <img src="isic/karta.png" alt="Karta" class="karta-image">
+                        <div class="karta-user-photo" aria-hidden="true">
+                            <div class="karta-user-photo-clip">
+                                <img id="karta-user-photo-img" alt="">
+                            </div>
+                        </div>
+                        <div class="dalsikarta dalsi--karta">
+                            <div class="overlay-container">
+                                <div class="group-1" id="grid">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+
+                                </div>
+                                <div class="group-2" id="grid">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+
+                                </div>
+                                <div class="group-3" id="grid">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+
+                                </div>
+                                <div class="group-4" id="grid">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+
+                                </div>
+                                <div class="group-5" id="grid">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+
+                                </div>
+                                <div class="group-6" id="grid">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="karta-overlay" aria-hidden="true">
+                            <div class="karta-row karta-row-name">
+                                <div class="karta-field">
+                                    <div class="karta-label">Name | Jméno</div>
+                                    <div class="karta-value karta-value--name" id="karta-name">Name Surname</div>
+                                </div>
+                            </div>
+
+                            <div class="karta-row karta-row-cols">
+                                <div class="karta-col karta-col-left">
+                                    <div class="karta-field">
+                                        <div class="karta-label">Born | Narozen(a)</div>
+                                        <div class="karta-value" id="karta-born">22.08.2000</div>
+                                    </div>
+                                    <div class="karta-field">
+                                        <div class="karta-label">Validity | Platnost</div>
+                                        <div class="karta-value" id="karta-validity">04/2026</div>
+                                    </div>
+                                </div>
+
+                                <div class="karta-col karta-col-right">
+                                    <div class="karta-field">
+                                        <div class="karta-label">Card Number | Číslo karty</div>
+                                        <div class="karta-value" id="karta-card-number">7833600462486811</div>
+                                    </div>
+                                    <div class="karta-field">
+                                        <div class="karta-label">ISIC Number | Číslo ISIC</div>
+                                        <div class="karta-value" id="karta-isic-number">S 420 330 687 667 J</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            </div>
+                        </div>
+
+                        <div class="karta-slide" data-slide="back">
+                            <div class="karta-wrap">
+                        <img src="isic/kartaback.png" alt="Karta (zadní strana)" class="karta-image">
+                        <div class="dalsikarta dalsi--karta">
+                            <div class="overlay-container">
+                                <div class="group-1" id="grid">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+
+                                </div>
+                                <div class="group-2" id="grid">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+
+                                </div>
+                                <div class="group-3" id="grid">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+
+                                </div>
+                                <div class="group-4" id="grid">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+
+                                </div>
+                                <div class="group-5" id="grid">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+
+                                </div>
+                                <div class="group-6" id="grid">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+                                    <img src="isic/0001.gif" alt="Animated GIF" class="rotating-gif">
+
+                                </div>
+                            </div>
+                        </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="karta-overlay" aria-hidden="true">
-                    <div class="karta-row karta-row-name">
-                        <div class="karta-field">
-                            <div class="karta-label">Name | Jméno</div>
-                            <div class="karta-value karta-value--name" id="karta-name">David Mecka</div>
-                        </div>
-                    </div>
 
-                    <div class="karta-row karta-row-cols">
-                        <div class="karta-col karta-col-left">
-                            <div class="karta-field">
-                                <div class="karta-label">Born | Narozen(a)</div>
-                                <div class="karta-value" id="karta-born">22.08.2000</div>
-                            </div>
-                            <div class="karta-field">
-                                <div class="karta-label">Validity | Platnost</div>
-                                <div class="karta-value" id="karta-validity">04/2026</div>
-                            </div>
-                        </div>
-
-                        <div class="karta-col karta-col-right">
-                            <div class="karta-field">
-                                <div class="karta-label">Card Number | Číslo karty</div>
-                                <div class="karta-value" id="karta-card-number">7833600462486811</div>
-                            </div>
-                            <div class="karta-field">
-                                <div class="karta-label">ISIC Number | Číslo ISIC</div>
-                                <div class="karta-value" id="karta-isic-number">S 420 330 687 667 J</div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="karta-dots" aria-hidden="true">
+                    <button class="karta-dot is-active" type="button" data-dot="front"></button>
+                    <button class="karta-dot" type="button" data-dot="back"></button>
                 </div>
             </div>
         </div>
@@ -256,31 +371,31 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Select the groups in reverse order
-            const groups = Array.from(document.querySelectorAll('.group-1, .group-2, .group-3, .group-4, .group-5, .group-6')).reverse();
+            // Spustit animaci zvlášť pro každý overlay (aby se "vlny" nemíchaly mezi kartami)
+            const overlayContainers = Array.from(document.querySelectorAll('.overlay-container'));
             const animationDuration = 1500; // Duration of each animation cycle in milliseconds
-            const delayBetweenLoops = 1000; // 1-second pause between each loop
+            const delayBetweenLoops = 1000; // Pause between loops
             const totalCycleTime = animationDuration + delayBetweenLoops;
-    
-            function startAnimation() {
+
+            function startAnimationForContainer(container) {
+                const groups = Array.from(container.querySelectorAll('.group-1, .group-2, .group-3, .group-4, .group-5, .group-6')).reverse();
+
                 groups.forEach((group, index) => {
-                    // Restart animation with the delay and set alternate direction
                     group.style.animation = 'fadeWave 1.5s ease-in-out forwards';
                     group.style.animationPlayState = 'running';
-                    group.style.animationDelay = `${index * 0.15}s`; // Stagger delay for each group
+                    group.style.animationDelay = `${index * 0.15}s`;
                 });
-    
-                // Pause animations after they complete, then restart after the delayBetweenLoops
+
                 setTimeout(() => {
                     groups.forEach((group) => {
-                        group.style.animation = 'none'; // Pause/reset the animation
+                        group.style.animation = 'none';
                     });
-    
-                    setTimeout(startAnimation, delayBetweenLoops); // Restart the animation after the pause
+
+                    setTimeout(() => startAnimationForContainer(container), delayBetweenLoops);
                 }, totalCycleTime);
             }
-    
-            startAnimation(); // Initial call to start the animation
+
+            overlayContainers.forEach((container) => startAnimationForContainer(container));
         });
     </script>
     
