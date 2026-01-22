@@ -94,7 +94,7 @@ body {
     padding-right: 20px;
     padding-top: 0px;
     border-radius: 25px;
-    height: 65vh;
+    height: auto;
     margin-top: 10px;
     display: flex;
     flex-direction: column;
@@ -204,37 +204,27 @@ body {
 }
 
 .karta-user-photo {
-    rotate: -90deg;
     position: absolute;
-    /* výchozí umístění – kdybys chtěl posunout, řekni "víc vlevo/výš" */
     top: 5%;
-    left:15%;
-    width: 34%;
-    /* rámeček širší než vyšší: poměr 40:33 (výška = 82.5% šířky) */
-    height: 0;
-    padding-top: 40%;
+    left: 15%;
+    width: 40vw;
+    height: 33vw;
     overflow: hidden;
     border-radius: 6px;
     background: rgba(255, 255, 255, 0.95);
-}
-
-.karta-user-photo-clip {
-    position: absolute;
-    inset: 0;
+    z-index: 10;
 }
 
 .karta-user-photo img {
-    rotate: 90deg;
     position: absolute;
     top: 50%;
-    left: -70%;
-    height: 100%;
-    width: auto;
-    display: block;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%) rotate(-90deg);
+    height: auto;
+    width: 100%;
+    min-width: 100%;
     object-fit: cover;
-    background: transparent;
-    transform: translate(-50%, -50%) rotate(-90deg);
-    transform-origin: center;
+    display: block;
 }
 
 .karta-overlay {
@@ -571,6 +561,7 @@ body {
     margin-top: 30px;
     display: flex;
     justify-content: center;
+    margin-bottom: 20px;
 
 }
 
